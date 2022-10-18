@@ -1,0 +1,34 @@
+docker container ls -a
+	mostra os container
+docker container run --name Ola
+	dá nome pra ela
+container run --rm
+	executa e termina a máquina
+docker container rm $ID_DO_CONTAINER ou $NOME
+	remove o container
+docker container run -it ubuntu /bin/bash
+	entra no modo interativo, e chama pelo bash
+docker container run -d $imagem
+	entra no modo daemon, não trava
+docker container exec -it $ID_DO_CONTAINER /bin/bash
+	entra no container
+docker container run -p 8080:80 -d $imagem 
+	binda a porta 8080 do localhost a porta 80 do container.
+docker container stop $id
+	para o container
+docker container rm -f $id
+	força a parada e remove
+docker container run -d -p 5432:5432 -e POSTGRES_PASWORD=123 -e POSTGRES_USER=user -e POSTGRES_DB=db postgree
+	-e = jogar as variáveis de ambiente, olhar documentação
+		POSTGRES_PASWORD=123 
+		POSTGRES_USER=user
+		POSTGRES_DB=db
+
+###CRIAR IMAGEM NOVA###
+é necessário criar um dockerfile, que contem:
+	FROM $IMAGEM_DE_ORIGEM
+	RUN $COMANDO_que_RODE
+	EXPOSE #escolhe portas
+Em seguida:
+	docker build -t ubuntu-curl . #usado no exemplo, o '.' aponta em qual diretório está o dockerfile
+## distribuir e armazenar imagens criadas ##
